@@ -64,10 +64,9 @@ async def analizar(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, analizar))
-    print("🤖 Bot iniciado")
-    app.run_polling()
+    # ... handlers ...
+    port = int(os.environ.get('PORT', 5000))
+    app.run_polling(drop_pending_updates=True)
 
 import os
 if __name__ == "__main__":
@@ -75,3 +74,4 @@ if __name__ == "__main__":
     app.run_polling(drop_pending_updates=True, allowed_updates=Update.ALL_TYPES)
 
     main()
+
